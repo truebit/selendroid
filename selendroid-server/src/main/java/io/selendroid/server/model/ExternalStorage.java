@@ -16,6 +16,7 @@ package io.selendroid.server.model;
 
 import android.os.Environment;
 import io.selendroid.server.common.model.ExternalStorageFile;
+import io.selendroid.server.util.SelendroidLogger;
 
 import java.io.File;
 
@@ -23,12 +24,21 @@ import java.io.File;
  * Provides access to device's external storage.
  */
 public class ExternalStorage {
+  private static final String MULTIUSER_SDCARD_ROOT_DIR = "/storage/emulated/0";
+  private static final String SDCARD_ROOT_DIR = "/storage/emulated/legacy";
 
   /**
    * Returns the external storage root.
    */
   public static File getExternalStorageDir() {
-    return Environment.getExternalStorageDirectory();
+    String externalStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+    if (externalStoragePath.contains(MULTIUSER_SDCARD_ROOT_DIR)) {
+      String replacedPath = externalStoragePath.replace(MULTIUSER_SDCARD_ROOT_DIR, SDCARD_ROOT_DIR);
+      String msg = String.format("converted external storage directory from %s to %s ", externalStoragePath, replacedPath);
+      SelendroidLogger.info(msg);
+      return new File(replacedPath);
+    }
+    return new File(externalStoragePath);
   }
 
   public static File getExtensionDex() {
