@@ -203,7 +203,7 @@ public class AndroidTouchScreen implements TouchScreen {
           event =
               MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_DOWN, point.x, point.y, 0);
         }
-        SelendroidLogger.debug("trying to send pointer");
+        SelendroidLogger.info("trying to send pointer");
         inst.sendPointerSync(event);
         isSuccess = true;
       } catch (SecurityException e) {

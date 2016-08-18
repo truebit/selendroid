@@ -115,7 +115,7 @@ public class AndroidNativeElement implements AndroidElement {
                   "width: %d\nheight: %d\ncurrent activity: %s\nfocused view: %s",
               view, isVisible, visibility, isShown, hasWindowFocus,
               width, height, activity, focusedView);
-      SelendroidLogger.debug(displayCheckFailureMessage);
+      SelendroidLogger.info(displayCheckFailureMessage);
       if (!isShown) {
         logIsShownCheckFailure(view);
       }
@@ -125,7 +125,7 @@ public class AndroidNativeElement implements AndroidElement {
       if (!hasWindowFocus) {
         if (activity != null && focusedView != null) {
           if (view.getRootView() == focusedView.getRootView()) {
-             SelendroidLogger.debug("hasWindowFocus() check failed. " +
+             SelendroidLogger.info("hasWindowFocus() check failed. " +
                     "This usually means the view is covered by a system dialog.");
           }
         }
@@ -141,18 +141,18 @@ public class AndroidNativeElement implements AndroidElement {
    */
   private void logIsShownCheckFailure(View view) {
     try {
-      SelendroidLogger.debug("Display check failed because View.isShown() == false");
+      SelendroidLogger.info("Display check failed because View.isShown() == false");
       View current = view;
       do {
         if ((current.getVisibility()) != View.VISIBLE) {
-          SelendroidLogger.debug(String.format(
+          SelendroidLogger.info(String.format(
               "isShown: View %s is not visible because its ancestor %s has visibility %d",
               view, current, current.getVisibility()));
           break;
         }
         ViewParent parent = current.getParent();
         if (parent == null) {
-          SelendroidLogger.debug(String.format(
+          SelendroidLogger.info(String.format(
               "isShown: View %s is not visible because its ancestor %s has no parent " +
                   "(it is not attached to view root): ",
               view, current));
@@ -166,7 +166,7 @@ public class AndroidNativeElement implements AndroidElement {
         }
         current = (View) parent;
       } while (current != null);
-      SelendroidLogger.debug(String.format("View %s is not visible", view));
+      SelendroidLogger.info(String.format("View %s is not visible", view));
     } catch (Exception e) {
       // Don't let an exception in debug printing crash the caller
       SelendroidLogger.error("isShown() debug printing failed", e);
@@ -269,7 +269,7 @@ public class AndroidNativeElement implements AndroidElement {
   }
 
   private void clickOnScreen(float x, float y) {
-    SelendroidLogger.debug(String.format("Clicking at position [%f, %f]", x, y));
+    SelendroidLogger.info(String.format("Clicking at position [%f, %f]", x, y));
     final ServerInstrumentation inst = instrumentation;
     long downTime = SystemClock.uptimeMillis();
     long eventTime = SystemClock.uptimeMillis();

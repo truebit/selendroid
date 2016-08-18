@@ -81,7 +81,7 @@ public class InstrumentedKeySender implements KeySender {
               "It is not possible to simulate the HOME key using instrumentation. " +
               "Please use adb, e.g. 'adb shell input keyevent 3'.");
         }
-        SelendroidLogger.debug("Send keys, sending special key code");
+        SelendroidLogger.info(String.format("Send keys, sending special key code: %d",keyCode));
         instrumentation.sendKeyDownUpSync(keyCode);
         currentIndex++;
       } else {
@@ -90,7 +90,7 @@ public class InstrumentedKeySender implements KeySender {
         // sendStringSync. So send as many such consecutive normal characters
         // as possible in a single String.
         int nextSpecialKey = indexOfSpecialKey(text, currentIndex);
-        SelendroidLogger.debug("Send keys, sending string");
+        SelendroidLogger.info(String.format("Send keys, sending string '%s' ",text));
         instrumentation.sendStringSync(text.subSequence(currentIndex, nextSpecialKey).toString());
         currentIndex = nextSpecialKey;
       }

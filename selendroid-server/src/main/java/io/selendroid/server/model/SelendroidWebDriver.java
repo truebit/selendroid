@@ -590,9 +590,9 @@ public class SelendroidWebDriver {
           if (("EUC-JP".equals(enc) || "Shift_JIS".equals(enc) || "ISO-2022-JP".equals(enc))
               && res.contains("\u00a5")) {
             SelendroidLogger.info("Perform workaround for japanese character encodings");
-            SelendroidLogger.debug("Original String: " + res);
+            SelendroidLogger.info("Original String: " + res);
             res = res.replace("\u00a5", "\\");
-            SelendroidLogger.debug("Replaced result: " + res);
+            SelendroidLogger.info("Replaced result: " + res);
           }
           result = res;
           syncObject.notify();
@@ -802,9 +802,9 @@ public class SelendroidWebDriver {
           if (("EUC-JP".equals(enc) || "Shift_JIS".equals(enc) || "ISO-2022-JP".equals(enc))
               && res.contains("\u00a5")) {
             SelendroidLogger.info("Perform workaround for japanese character encodings");
-            SelendroidLogger.debug("Original String: " + res);
+            SelendroidLogger.info("Original String: " + res);
             res = res.replace("\u00a5", "\\");
-            SelendroidLogger.debug("Replaced result: " + res);
+            SelendroidLogger.info("Replaced result: " + res);
           }
           result = res;
           syncObject.notify();
@@ -1035,9 +1035,9 @@ public class SelendroidWebDriver {
           if (("EUC-JP".equals(enc) || "Shift_JIS".equals(enc) || "ISO-2022-JP".equals(enc))
               && res.contains("\u00a5")) {
             SelendroidLogger.info("Perform workaround for japanese character encodings");
-            SelendroidLogger.debug("Original String: " + res);
+            SelendroidLogger.info("Original String: " + res);
             res = res.replace("\u00a5", "\\");
-            SelendroidLogger.debug("Replaced result: " + res);
+            SelendroidLogger.info("Replaced result: " + res);
           }
           result = res;
           syncObject.notify();
