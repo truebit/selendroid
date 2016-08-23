@@ -40,6 +40,8 @@ public class UncaughtExceptionHandling {
   private static class ExceptionDumper implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
+      SelendroidLogger.error("!!!exception start!!!", ex);
+      SelendroidLogger.error("!!!exception end!!!");
       File crashLogFile = ExternalStorage.getCrashLog();
       String outputPath = crashLogFile.getAbsolutePath();
 
@@ -50,8 +52,6 @@ public class UncaughtExceptionHandling {
         pw.flush();
 
         SelendroidLogger.info("Process has crashed, log has been written to: " + outputPath);
-        SelendroidLogger.error("!!!exception start!!!", ex);
-          SelendroidLogger.error("!!!exception end!!!");
       } catch (Exception logEx) {
         SelendroidLogger.error("Could not write crash log to: " + outputPath, logEx);
       } finally {
