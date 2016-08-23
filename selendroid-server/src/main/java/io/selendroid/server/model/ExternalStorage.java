@@ -15,6 +15,7 @@
 package io.selendroid.server.model;
 
 import android.os.Environment;
+import android.os.Build;
 import io.selendroid.server.common.model.ExternalStorageFile;
 import io.selendroid.server.util.SelendroidLogger;
 
@@ -32,7 +33,7 @@ public class ExternalStorage {
    */
   public static File getExternalStorageDir() {
     String externalStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-    if (externalStoragePath.contains(MULTIUSER_SDCARD_ROOT_DIR)) {
+    if (externalStoragePath.contains(MULTIUSER_SDCARD_ROOT_DIR) && Build.VERSION.SDK_INT < 23) {
       String replacedPath = externalStoragePath.replace(MULTIUSER_SDCARD_ROOT_DIR, SDCARD_ROOT_DIR);
       String msg = String.format("converted external storage directory from %s to %s ", externalStoragePath, replacedPath);
       SelendroidLogger.info(msg);
